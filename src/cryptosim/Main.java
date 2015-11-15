@@ -25,5 +25,6 @@ public class Main {
 		
 		main.process();
 		main.printFinished();
+		System.out.println("gg");
 	}
 }
