@@ -8,13 +8,13 @@ import cryptosim.utils.Node;
 
 public class SendOp extends Operation {
 
-	public SendOp(int in) {
-		super(in);
+	public SendOp(DataVar input, Node sourceNode, Node ... destNodes) {
+		super("Send", null, input);
 	}
 	
 	// Returns input, no change
 	public DataVar getOutputVar() {
-		return new DataVar(5, "hi");
+		return new DataVar(inputs[0]);
 	}
 	
 	public int getDuration() {
@@ -23,9 +23,5 @@ public class SendOp extends Operation {
 	
 	public String getLabel() {
 		return "Send Operation";
-	}
-	
-	public Queue<Dependency> getOutputQueue() {
-		return null;
 	}
 }

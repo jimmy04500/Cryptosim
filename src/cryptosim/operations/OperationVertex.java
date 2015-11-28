@@ -2,10 +2,8 @@ package cryptosim.operations;
 
 import java.util.ArrayList;
 
-import cryptosim.utils.TimeRange;
-
 public class OperationVertex {
-	public Operation operation;
+	private Operation operation;
 	public ArrayList<OperationVertex> toVertices;
 	public ArrayList<OperationVertex> fromVertices;
 	private int startTime;
@@ -36,5 +34,8 @@ public class OperationVertex {
 	}
 	public int getFinishTime() {
 		return finishTime;
+	}
+	public Operation getOperation() {
+		return operation;
 	}
 }

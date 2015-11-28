@@ -1,20 +1,16 @@
 package cryptosim.operations;
 
-import cryptosim.DataType;
 import cryptosim.DataVar;
-import cryptosim.Dependency;
-import cryptosim.Queue;
+import cryptosim.utils.Node;
 
 public class ConstMultOp extends Operation{
-	public DataVar a;
 	
-	public ConstMultOp(DataVar a, String description) {
-		super(1, description);
-		this.a = a;
+	public ConstMultOp(String description, Node parent, DataVar input) {
+		super(description, parent, input);
 	}
 	
-	public DataVar getOutputVar() {
-		DataVar output = new DataVar(a.value * 5, "ConstMult output");
+	protected DataVar getOutputVar() {
+		DataVar output = new DataVar(inputs[0].value * 5, "ConstMult output");
 		return output;
 	}
 	

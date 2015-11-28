@@ -9,19 +9,19 @@ import java.util.HashMap;
 import cryptosim.operations.BeginOp;
 import cryptosim.operations.Operation;
 import cryptosim.operations.OperationVertex;
-import cryptosim.operations.RootOp;
 import cryptosim.utils.CoreUtil;
 import cryptosim.utils.Node;
 
 public class TimeLine {
 	private HashMap<Integer, OperationVertex> dictOps;
 	
+	private CoreUtil coreUtil;
 	private ArrayList<Node> nodes;
 	private ArrayList<OperationVertex> startOps;
-	public CoreUtil coreUtil;
 	private ArrayList<OperationVertex> processed;
 	private ArrayList<OperationVertex> unprocessed;
 	private int currentTime;
+	private int c = 0;
 	
 	public TimeLine() {
 		dictOps = new HashMap<Integer, OperationVertex>();
@@ -42,7 +42,7 @@ public class TimeLine {
 			System.out.println("Adding more begin operations than the number of nodes");
 		OperationVertex beginOp = new OperationVertex(operation);
 		startOps.add(beginOp);
-		dictOps.put(beginOp.operation.OP_ID, beginOp);
+		dictOps.put(beginOp.getOperation().OP_ID, beginOp);
 		unprocessed.add(beginOp);
 	}
 	
@@ -54,7 +54,7 @@ public class TimeLine {
 				OperationVertex temp = unprocessed.get(i);
 				boolean resolved = false;
 				boolean completed = true;
-				if (temp.operation.resolvedDeps()) {
+				if (temp.getOperation().resolved()) {
 					resolved = true;
 				}
 				for (OperationVertex op : temp.fromVertices) {
@@ -68,15 +68,17 @@ public class TimeLine {
 			}
 			for (int i = 0; i < toBeProcessed.size(); i++) {
 				OperationVertex temp = toBeProcessed.get(i);
-				int startTime = coreUtil.scheduleOperation(currentTime, temp.operation);
+				int startTime = coreUtil.scheduleOperation(currentTime, temp.getOperation());
 				temp.setStartTime(startTime);
-				for (OperationVertex op : temp.toVertices) {
-					op.operation.decrementNum();
-				}
+				temp.getOperation().getOutput().setFinished(true);
 				processed.add(temp);
 			}
 			coreUtil.clearPreviousOps(currentTime);
 			currentTime = coreUtil.getNextLowestAvailable();
+			c++;
+			if (c == 3) {
+				//break;
+			}
 		}
 	}
 	
@@ -104,8 +106,9 @@ public class TimeLine {
 	}
 	
 	public void printFinished() {
+		System.out.println("[Printing Timeline]");
 		for (OperationVertex vertex : processed) {
-			System.out.println(vertex.operation.toString() + " startTime: " + vertex.getStartTime() + " finishTime: " + vertex.getFinishTime());
+			System.out.println(vertex.getOperation().toString() + " startTime: " + vertex.getStartTime() + " finishTime: " + vertex.getFinishTime());
 		}
 	}
 }

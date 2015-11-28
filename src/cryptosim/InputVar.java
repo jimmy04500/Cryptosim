@@ -1,8 +1,9 @@
 package cryptosim;
 
-public class InputVar {
+public class InputVar extends DataVar {
 	
-	public InputVar() {
-		
+	public InputVar(int value, String info) {
+		super(value, info);
+		setFinished(true);
 	}
 }

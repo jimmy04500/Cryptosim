@@ -1,17 +1,16 @@
 package cryptosim.operations;
 
 import cryptosim.DataVar;
+import cryptosim.utils.Node;
 
 public class ConstAddOp extends Operation {
-	public DataVar a;
 	
-	public ConstAddOp(DataVar a, String description) {
-		super(1, description);
-		this.a = a;
+	public ConstAddOp(String description, Node parent, DataVar input) {
+		super(description, parent, input);
 	}
 	
-	public DataVar getOutputVar() {
-		DataVar output = new DataVar(a.value + 5, "ConstAdd output");
+	protected DataVar getOutputVar() {
+		DataVar output = new DataVar(inputs[0].value + 5, "ConstAdd output");
 		return output;
 	}
 	
@@ -20,6 +19,6 @@ public class ConstAddOp extends Operation {
 	}
 	
 	public String getLabel() {
-		return "Const Mult";
+		return "Const Add";
 	}
 }

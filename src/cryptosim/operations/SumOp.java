@@ -9,7 +9,7 @@ public class SumOp extends Operation {
 	public DataVar a, b;
 	
 	public SumOp(DataVar a, DataVar b) {
-		super(2);
+		super("Sum", null);
 		//if (a.type != DataType.INT || b.type != DataType.INT)
 			//throw new Error("Type Mismatch");
 		this.a = a;
@@ -22,24 +22,11 @@ public class SumOp extends Operation {
 		return output;
 	}
 	
-	public Queue<Dependency> getOutputQueue() {
-		/*
-		Queue<Dependency> queue = new Queue<Dependency>();
-		
-		BeginOp begin = new BeginOp();
-		EndOp end = new EndOp();
-		HomomorphicEncryptOp homomorph = new HomomorphicEncryptOp(1);
-		SampleOp sample = new SampleOp(1);
-		queue.enqueue(new Dependency(begin, homomorph));
-		queue.enqueue(new Dependency(homomorph, sample));
-		queue.enqueue(new Dependency(sample, end));
-		return queue;
-		*/
-		return null;
-	}
-	
 	public String getLabel() {
 		return "Sum";
 	}
-
+	
+	public int getDuration() {
+		return 2;
+	}
 }

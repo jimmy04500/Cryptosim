@@ -8,7 +8,7 @@ import cryptosim.Queue;
 public class ReceiveOp extends Operation{
 	
 	public ReceiveOp(int in) {
-		super(in, "");
+		super("Receive", null);
 	}
 	
 	// Returns a copy of the input variable
@@ -23,10 +23,6 @@ public class ReceiveOp extends Operation{
 	}
 	
 	public String getLabel() {
-		return "Receive Operation";
-	}
-	
-	public Queue<Dependency> getOutputQueue() {
-		return null;
+		return "Receive";
 	}
 }

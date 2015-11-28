@@ -8,7 +8,7 @@ public class ModOp extends Operation {
 	public DataVar value, modulo;
 	
 	public ModOp(DataVar value, DataVar modulo) {
-		super(2, "Mod");
+		super("Mod", null, value, modulo);
 		this.value = value;
 		this.modulo = modulo;
 	}

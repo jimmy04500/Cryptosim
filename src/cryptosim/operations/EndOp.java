@@ -7,7 +7,7 @@ import cryptosim.Queue;
 public class EndOp extends Operation {
 	
 	public EndOp() {
-		super(0, "");
+		super("End", null);
 	}
 	
 	public DataVar getOutputVar() {

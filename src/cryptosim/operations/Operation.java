@@ -3,31 +3,43 @@ package cryptosim.operations;
 import cryptosim.DataVar;
 import cryptosim.Dependency;
 import cryptosim.Queue;
+import cryptosim.utils.Node;
 
 public abstract class Operation {
-	public static int ID_COUNTER = 1;
+	private static int ID_COUNTER = 1;
 	
+	protected DataVar[] inputs;
+	private DataVar output;
 	public int OP_ID;
-	public int dependencies;
 	public String description;
+	private Node parentNode;
 	
-	public Operation() {
-		this(1, "Empty operation");
+	public Operation(Node parent) {
+		this("Empty Op", parent);
 	}
 	
-	public Operation(int in, String info) {
-		dependencies = in;
+	public Operation(String description, Node parentNode, DataVar ... inputs) {
+		this.inputs = inputs;
+		this.description = description;
+		output = getOutputVar();
+		this.parentNode = parentNode;
+		
 		OP_ID = ID_COUNTER;
 		ID_COUNTER++;
-		description = info;
 	}
 	
-	public void decrementNum() {
-		dependencies--;
+	public DataVar getOutput() {
+		return output;
 	}
 	
-	public boolean resolvedDeps() {
-		return dependencies == 0;
+	public boolean resolved() {
+		boolean resolved = true;
+		for (DataVar var : inputs) {
+			if (!var.isFinished()) {
+				resolved = false;
+			}
+		}
+		return resolved;
 	}
 	
 	public String toString() {
@@ -35,6 +47,7 @@ public abstract class Operation {
 	}
 	
 	public abstract int getDuration();
-	public abstract DataVar getOutputVar();
 	public abstract String getLabel();
+	
+	protected abstract DataVar getOutputVar();
 }

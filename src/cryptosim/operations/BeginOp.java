@@ -3,17 +3,16 @@ package cryptosim.operations;
 import cryptosim.DataVar;
 import cryptosim.Dependency;
 import cryptosim.Queue;
+import cryptosim.utils.Node;
 
 public class BeginOp extends Operation {
-	DataVar input;
 	
-	public BeginOp(DataVar input) {
-		super(0, "begin");
-		this.input = input;
+	public BeginOp(Node parent, DataVar input) {
+		super("begin", parent, input);
 	}
 	
 	public DataVar getOutputVar() {
-		return input;
+		return new DataVar(inputs[0]);
 	}
 	
 	public int getDuration() {
@@ -23,9 +22,5 @@ public class BeginOp extends Operation {
 	
 	public String getLabel() {
 		return "Begin";
-	}
-	
-	public Queue<Dependency> getOutputQueue() {
-		return null;
 	}
 }

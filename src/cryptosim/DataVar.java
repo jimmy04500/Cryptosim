@@ -6,16 +6,24 @@ public class DataVar {
 	public DataType type;
 	public double value;
 	public String description;
-	private boolean isAvailable;
+	private boolean isFinished;
 	
 	public DataVar(double val, String info) {
 		value = val;
 		description = info;
-		isAvailable = true;
+		isFinished = false;
 	}
 	
 	public DataVar(DataVar var) {
 		value = var.value;
 		description = var.description;
+	}
+	
+	public boolean isFinished() {
+		return isFinished;
+	}
+	
+	public void setFinished(boolean finish) {
+		isFinished = finish;
 	}
 }
